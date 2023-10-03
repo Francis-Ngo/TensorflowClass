@@ -1,0 +1,61 @@
+Hello, and welcome. In this video, we'll be reviewing a
+brief introduction to the convolutional
+neural network model. Convolutional neural
+networks or CNNs have gained a lot of attention in the machine learning community
+over the last few years. This is due to the wide range of applications where CNNs excel, such as object detection
+and speech recognition. In a later part of this video, we'll examine the object
+recognition problem, which is a key consideration
+when using CNNs. You'll also get an idea of how a CNN structure allows it to extract the
+elements from an image. For example, you'll see how
+a CNN learns to pick out a person or a dog or even
+chairs from an image, even if the chairs are
+only partially visible. Indeed, this is not
+an easy task for computers and it took years of dedicated research
+to achieve this. The original goal of
+the CNN was to form the best possible
+representation of our visual world in order to
+support recognition tasks. The CNN solution needed to have two key features
+to make it viable. First, it needed to be able
+to detect the objects in the image and place them into
+the appropriate category. Second, it also needed to be robust against
+differences in pose, scale, illumination,
+confirmation and clutter. The importance of
+this second feature simply cannot be overstated, since this was historically a huge limitation of
+hand-coded algorithms. Interestingly enough, the solution to the
+object recognition issue was inspired by examining the way our own visual cortex operates. In short, the CNN starts
+with an input image. It then extracts a few
+primitive features and combines those features to form certain parts of the object. Finally, it pulls together all of the various parts to
+form the object itself. In essence, it is a hierarchical
+way of seeing objects. That is, in the first layer, very simple features
+are detected. Then these are combined to shape more complicated features in
+the second layer and so on to detect things like a cat or a dog or any other object
+we're needing to detect. The convolutional neural network was developed from this
+sequence of steps. Let's consider the building in the lower right-hand
+corner of this image. How can a trained CNN learn and recognize that it's
+an image of a building, rather than some of
+the other elements that are situated
+in the photograph, such as a person or even
+those clouds in the sky? Well, in the training phase, CNNs would receive many
+building images as input. Then CNNs will
+automatically find that the best primitive
+features for a building would be things like
+horizontal and vertical lines. Much like the neurons firing
+in a person's visual cortex, the first layer in a CNN reacts when it receives an image that has horizontal
+or vertical lines. Once these simpler features
+such as lines are combined, CNNs learn to form higher
+abstract components, like the windows of the building and the building's
+external shape. It can then use these
+basic parts to form the complete object and learn how the entire building
+essentially looks like. Later, if it sees an image of a building that it
+hasn't seen before, CNNs can make a decision if
+the new input image is of a building based
+on the persistence of the various features
+it has stored. It is the same process for learning and detecting
+other objects, such as faces, animals, cars, and so on. So as you can see, the CNN is a set of
+layers with each of them being responsible to
+detect a set of feature sets, and these features are
+going to be more abstract as it goes further into
+examining the next layer. So at this point, you should have a basic
+understanding of the principles behind a convolutional
+neural network, and how CNNs might be
+used in an application. Thanks for watching.

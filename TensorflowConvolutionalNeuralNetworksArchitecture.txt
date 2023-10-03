@@ -1,0 +1,153 @@
+Hello and welcome. In this video, we'll be examining
+the architecture of the Convolutional
+Neural Network Model. As previously mentioned,
+CNN is a type of neural network empowered with some specific hidden layers, including the
+convolutional layer, the pooling layer, and the
+fully connected layer. Let's start with the first layer, the convolutional layer. The main purpose of the
+convolutional layer is to detect different patterns or
+features from an input image. For example, it's edges. Assume that, you have
+an image and you want to find the
+edges from the photo so that you can define a filter which is
+also called a kernel. Now, if you slide the
+filter over the image and apply the dot product of the
+filter to the image pixels, the result would be a new
+image with all of the edges. That is, applying the filter to the left image will result in the right features that
+are typically useful for the initial layers of a CNN. In fact, the output is one of the very first
+primitive feature sets in the hierarchy of features, it is one of the key
+concepts behind CNNs. Now, the question is, what really happens
+mathematically when we apply a filter or
+kernel on an image? This brings us to the
+convolution process. Convolution is a function
+that can detect edges, orientations, and small
+patterns in an image. The convolution operation can be seen as a mathematical function. Imagine that, we have a
+simple black and white image as you see here. We can convert the image to a matrix of pixels
+with binary values, where one means a white pixel and zero represents
+a black pixel. Please keep in mind however, that the most common
+usage is a value between 0 and 255 for a gray scale image or a three-channel image
+for a color image. But for now and for the
+sake of simplicity, let's use zero and
+one as our values. In this step, we define a filter. It can be any type of filter
+even a random filter, but let's use the Edge
+Detector filter for now. Now, let's slide it
+over the image and then calculate the convolved
+value for the first slide. Taking the values
+negative one and one on two adjacent pixels and zero everywhere else
+for the filter, results in the following image. Now, let's slide
+the kernel again. It will calculate
+the second element of our convolved image. We repeat this process to
+complete the convolved matrix. So in essence, the
+convolution function is a simple matrix multiplication
+and in this instance, the result shows us the
+edges of the image. Now, let's consider
+a handwritten digit that we want to recognize. We can apply a kernel to it. It is in fact the sum of
+element-wise multiplication of the kernel matrix and the image matrix as shown
+on the previous slide. So, we can show the result as convolving a kernel on the image. Applying multiple
+kernels on one image will result in multiple
+convolved images. Now you can understand that
+leveraging different kernels allows us to find different patterns in
+an image such as edges, curves, and so on. The output of the
+convolution process is called a feature map. At this point, you might
+be asking yourself, how do I choose or initialize
+the proper kernels? Well, typically you
+initialize the kernels with random values and during
+the training phase, the values will be updated with optimum values in such a way that the digit is recognized. For example, here is
+the result of applying eight different kernels
+on the digit 2. As you can see, each kernel will recognize a particular
+pattern in the digit. This is the first layer of
+convolutional deep learning. We can interpret this layer to traditional neural
+network terminology. The input image can be
+considered as a matrix that we feed into the neural
+network through input nodes. For example in this case, the input layer of the
+network has 28 by 28 nodes. The output of the
+coevolution process are eight of 28 by 28 neurons. We can assume those
+as hidden nodes. So what are the weights between the input
+and hidden nodes? Yes, the eight kernels
+which are five by five. Now, we need to make a
+decision as to whether each hidden neuron
+should be fired or not. So, we have to add activation
+functions to the neurons. We use ReLu which is short
+for rectified linear unit as the activation function on top of nodes in the
+convolution layer. ReLu is a non-linear
+activation function, which is used to increase the
+non-linear properties of the decision function. So how can we apply it
+on a convolution layer? Well, we just go through all outputs of the
+convolution layer, convolved1, and wherever a negative number occurs we swap it out for a zero. This is called the ReLu
+activation function. Now, we have gone
+one step further. In this step, we have to downsample the output images from the ReLu function to reduce the dimensionality of
+the activate neurons. We use another layer which
+is called max pooling. Max pooling is an
+operation that finds the maximum values and
+simplifies the inputs. In other words, it reduces the number of parameters
+within the model. In a sense, it turns the low-level data into
+higher level information. For example, we can select
+a Window of size of two by two and then select the
+maximum value for this matrix. That is, if the image
+is a two-by-two matrix, it would result in
+one output pixel. Also in this step, we can define strides. A stride dictates
+the sliding behavior of the max pooling. For example, if we
+select stride equals 2, the Window will move
+two pixels every time. Thus, not overlapping. Now, we should have our output matrices but
+with lower dimensions. For example, 14 by 14. The next layer is the
+fully connected layer. Fully connected layers take the high-level filtered images
+from the previous layer. That is, all eight matrices in our case and convert
+them into a vector. First, each previous layer matrix will be converted to a
+one-dimensional vector. Then, it will be
+fully connected to the next hidden
+layer which usually has a low number of hidden units. We call it fully connected
+because each node from the previous layer is connected to all the nodes of this layer. It is connected through
+a weight matrix. We can use ReLu
+activation again here. Finally, we use softmax to
+find the class of each digit. Softmax is an activation
+function that is normally used in
+classification problems. It generates the
+probabilities for the output. For example, our
+model will not be a 100 percent sure that
+what digit is the number 3. Instead, the answer will
+be a distribution of probabilities where if
+the model is right, the three will be assigned
+the larger probability. That is, softmax can output a multi-class categorical
+probability distribution. Now, let's put all of
+these layers together. This chart shows
+the main layers of a convolutional neural network. As you can see, the whole
+network generally is doing two tasks: the first part of this network is all about feature learning and extraction, and the second part revolves
+around classification. If we look at each operation
+as a building block, we can see that a typical
+convolutional neural network might look like this diagram. As you can imagine though, a typical CNN architecture for an image classification can
+be much more complicated. It can be a chain
+of repeating conv, ReLu, max pool operations. For example, here
+we see more than one convolutional layer followed by a few fully connected layers. Also, note the effect
+of each single conv, ReLu, and max pool operations
+pass through the image. It reduces height and width of the individual image and then it increases the
+depth of the images. For example, the output of the first convolutional
+layer is an image of Depth 8 and the output of the second layer is
+an image of Depth 32. This is very important because
+using multiple layers, CNN will be able to break down the complex patterns into a
+series of simpler patterns. If we pass one of the
+digits through the network, you can see the outputs. In the first convolutional layer, we apply eight kernels
+of size five by five, then we apply ReLu and max pool. In the second
+convolutional layer, we use 32 kernels. Again, we apply
+ReLu and max pool. We connect the outputs to
+a fully connected layer. Also, we use a second
+fully connected layer with a lower number of nodes. Finally, we use softmax
+in the last layer. Now you can imagine
+that if we use a CNN trained on human faces, the first layers will represent mostly
+primitive features. For example, the details
+of each part of the faces, the next layers represent more abstract patterns
+such as the nose and eyes, with the last layers representing more
+face-like patterns. Now, let's take a closer look at this architecture and see what happens in the training phase of convolutional neural networks. As mentioned, a CNN
+is a type of feed forward neural network consisting of multiple layers of neurons. Each neuron in a layer receives
+some input, processes it, and optionally follows it with a non-linear output using
+an activation function. So, what is the network going to learn through
+the training process? It learns the connection
+between the layers. These are the learnable
+weights and biases matrices. In fact, the whole network
+as about a series of dot products between
+the weight matrices and the input matrix. This means we must first initialize the weights
+of the network randomly, then we will keep feeding the network with a big
+data set of images, we then check the output
+of the network and depending on how far the output
+is from the expected one, we change or update the weights. We keep repeating this process until it reaches a high
+accuracy of prediction. Of course, this is a
+very high level picture of the whole training process. In any case, I hope
+you've absorbed the main ideas behind CNNs. For a better understanding of Convolutional Neural Networks, I recommend that
+you run the labs of this module, which will walk you through different layers of CNN. Thanks for watching.
